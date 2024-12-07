@@ -1,0 +1,42 @@
+
+
+
+*{
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+.wrapper{
+    width: 70%;
+    margin: 0 auto;
+}
+.cardo-regular {
+    font-family: "Cardo", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+.cardo-bold {
+    font-family: "Cardo", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+.cardo-regular-italic {
+    font-family: "Cardo", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+body {
+    font-family: "Cardo", serif;
+    background-color: #fff;
+}
+.pp{
+  line-height: 2ch;
+  width: 190px;
+
+}
+
+
