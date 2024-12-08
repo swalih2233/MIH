@@ -19,17 +19,20 @@
 </head>
 <style>
   #home .bg-overlay {
-  background-image: url('./images/Images-01.png'); /* Default for desktop */
-  background-size: cover;
-  background-position: left bottom;
-  background-repeat: no-repeat;
-}
-
-@media screen and (max-width: 640px) {
-  #home .bg-overlay {
-    background-image: url('./images/mobile.jpg'); /* Mobile */
+    background-image: url('./images/Images-01.png'); /* Default for desktop */
+    background-size: cover;
+    background-position: left bottom;
+    background-repeat: no-repeat;
   }
-}
+
+  @media screen and (max-width: 640px) {
+    #home .bg-overlay {
+      background-image: url('./images/mobile.jpg'); /* Mobile version */
+      background-size: cover;
+      background-position: right; /* Position the person at the right end */
+      background-repeat: no-repeat;
+    }
+  }
 </style>
 <body class="bg-white">
    <!-- Navbar -->
@@ -84,13 +87,13 @@
  <!-- Hero Section -->
  <section id="home" class="relative h-screen">
   <!-- Background Image with Overlay -->
-  <div class="absolute inset-0 bg-overlay"></div>
-  <div class="absolute inset-0 "></div>
+  <div class="absolute inset-0 bg-overlay bg-cover bg-no-repeat bg-left-bottom md:bg-right transition-all duration-300 ease-in-out hover:brightness-75 hover:scale-105">
+  </div>
 
   <!-- Hero Content -->
-  <div class="relative flex items-center justify-center h-full px-4">
-    <div data-aos="fade-right" class="text-center text-[#023D4D]">
-      <h2 class="font-cardo text-2xl font-[400] leading-tight">
+  <div class="relative flex items-center justify-center h-full px-4 ">
+    <div data-aos="fade-right" class="text-center text-[#023D4D] mt-[-40px]">
+      <h2 class="font-cardo text-2xl font-[400] leading-tight ">
         Embark on a journey from
       </h2>
       <h2 data-aos="fade-right" class="font-cardo text-2xl font-[400] leading-tight text-right">
