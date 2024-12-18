@@ -18,117 +18,173 @@
   <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <style>
-  #home .bg-overlay {
-    background-image: url('./images/Images-01.png'); /* Default for desktop */
-    background-size: cover;
-    background-position: left bottom;
-    background-repeat: no-repeat;
-  }
-
-  @media screen and (max-width: 640px) {
     #home .bg-overlay {
-      background-image: url('./images/mobile.jpg'); /* Mobile version */
+      background-image: url('./images/Images-01.png'); /* Default for desktop */
       background-size: cover;
-      background-position: right; /* Position the person at the right end */
+      background-position: left bottom;
       background-repeat: no-repeat;
+      filter: blur(10px); /* Initial blur effect */
+      opacity: 0.3; /* Lower opacity */
+      transition: all 0.3s ease-in-out; /* Smooth transition */
     }
-  }
+
+    @media screen and (max-width: 640px) {
+      #home .bg-overlay {
+        background-image: url('./images/mobile.jpg'); /* Mobile version */
+        background-size: cover;
+        background-position: right; /* Position the person at the right end */
+        background-repeat: no-repeat;
+      }
+    }
+
+/* Centered Logo on Page Load */
+/* Centered Logo on Page Load */
+/* Centered Logo on Page Load */
+.logo-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    transition: all 1s ease-in-out;
+    opacity: 1;
+}
+
+/* Adjust for small screens */
+@media (max-width: 640px) { /* 'sm' breakpoint */
+    .logo-container {
+        top: 50%;
+        left: 46%;
+        transform: translate(-50%, -50%); /* Ensure proper centering */
+    }
+}
+
+/* Final Logo Position in Navbar (when scrolled) */
+.logo-container.scrolled {
+    top: 20px;
+    left: 50%; /* Keep logo centered */
+    transform: translate(-50%, 0) scale(0.7); /* Scale down but stay centered */
+    opacity: 1; /* Keep opacity full */
+    
+}
+.logo-container.scrolled img{
+ height: 60px;
+}
+
+/* Navbar links and hero text visibility */
+.nav-links, .hero-text {
+    opacity: 0.3; /* Initial opacity */
+    filter: blur(3px); /* Initial blur */
+    transition: opacity 0.5s ease-out, filter 0.5s ease-out;
+}
+
+/* Final style after scroll for normal appearance */
+.nav-links.visible, .hero-text.visible {
+    opacity: 1; /* Full opacity */
+    filter: blur(0); /* Remove blur */
+}
+
+
 </style>
+
 <body class="bg-white">
-   <!-- Navbar -->
-   <header data-aos="fade-up" data-aos-anchor-placement="top-bottom" class="absolute w-full z-10 mt-10">
-    <nav class="container mx-auto px-6 lg:px-[200px] flex items-center justify-between">
-      <!-- Left Logo -->
-      <div class="flex items-center">
-        <img 
-          src="images/Images-09.png" 
-          alt="Logo" 
-          class="h-[50px] sm:h-[60px] md:h-[70px]"
-        >
-      </div>
-      
+  <header class="sticky top-[30px] w-full z-50">
+    <!-- Centered Logo -->
+    <div id="logo-container" class="logo-container">
+        <img src="images/Images-09.png" alt="Logo" class="h-[80px] sm:h-[70px] md:h-[110px]">
+    </div>
 
-      <!-- Right Navigation Links for Desktop -->
-      <ul class="hidden lg:flex space-x-6 text-[#023D4D] text-[16px] font-medium">
-        <li><a href="#home" class="hover:text-gray-300 scroll-link">Home</a></li>
-        <li><a href="#programs" class="hover:text-gray-300 scroll-link">Programs</a></li>
-        <li><a href="#resources" class="hover:text-gray-300 scroll-link">Resources</a></li>
-        <li><a href="#about" class="hover:text-gray-300 scroll-link">About</a></li>
-        <li><a href="#alumni" class="hover:text-gray-300 scroll-link">Alumni</a></li>
-      </ul>
 
-      <!-- Hamburger Icon for Mobile -->
-      <button id="menu-toggle" class="lg:hidden text-[#023D4D] text-2xl focus:outline-none">
-        <i class="bx bx-menu"></i>
-      </button>
+
+    <!-- Navbar -->
+    <nav class="container mx-auto px-6 lg:px-[100px] flex items-center justify-between relative">
+        <ul class="hidden lg:flex space-x-6 text-[#023D4D] text-[16px] font-medium nav-links">
+            <li><a href="#home" class="hover:text-gray-300">Home</a></li>
+            <li><a href="#programs" class="hover:text-gray-300">Programs</a></li>
+            <li><a href="#resources" class="hover:text-gray-300">Resources</a></li>
+            <li><a href="#about" class="hover:text-gray-300">About</a></li>
+            <li><a href="#alumni" class="hover:text-gray-300">Alumni</a></li>
+        </ul>
+
+        <!-- Right Placeholder (to balance layout) -->
+        <div class="hidden lg:block w-[200px]"></div>
+
+        <!-- Hamburger Icon for Mobile -->
+        <button id="menu-toggle" class="lg:hidden text-[#023D4D] text-2xl focus:outline-none">
+            <i class="bx bx-menu"></i>
+        </button>
     </nav>
+</header>
 
-    <!-- Mobile Navigation Menu -->
-    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[75%] max-w-xs bg-white text-[#023D4D] shadow-lg transform translate-x-full transition-transform duration-300 lg:hidden">
-      <!-- Close Button -->
-      <div class="flex justify-between items-center p-4 border-b border-gray-300">
+<!-- Mobile Navigation Menu -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[75%] max-w-xs bg-white text-[#023D4D] shadow-lg transform translate-x-full transition-transform duration-300 lg:hidden">
+    <div class="flex justify-between items-center p-4 border-b border-gray-300">
         <img src="images/Images-09.png" alt="Logo" class="h-[50px]">
         <button id="close-menu" class="text-2xl focus:outline-none">
-          <i class="bx bx-x"></i>
+            <i class="bx bx-x"></i>
         </button>
-      </div>
-
-      <!-- Navigation Links -->
-      <ul class="space-y-2 mt-6 px-4">
-        <li><a href="#home" class="block w-full px-4 py-3 bg-[#f9f9f9] border border-gray-200 text-center text-[16px] font-medium rounded-lg hover:bg-[#023D4D] hover:text-white transition scroll-link">Home</a></li>
-        <li><a href="#programs" class="block w-full px-4 py-3 bg-[#f9f9f9] border border-gray-200 text-center text-[16px] font-medium rounded-lg hover:bg-[#023D4D] hover:text-white transition scroll-link">Programs</a></li>
-        <li><a href="#resources" class="block w-full px-4 py-3 bg-[#f9f9f9] border border-gray-200 text-center text-[16px] font-medium rounded-lg hover:bg-[#023D4D] hover:text-white transition scroll-link">Resources</a></li>
-        <li><a href="#about" class="block w-full px-4 py-3 bg-[#f9f9f9] border border-gray-200 text-center text-[16px] font-medium rounded-lg hover:bg-[#023D4D] hover:text-white transition scroll-link">About</a></li>
-        <li><a href="#alumni" class="block w-full px-4 py-3 bg-[#f9f9f9] border border-gray-200 text-center text-[16px] font-medium rounded-lg hover:bg-[#023D4D] hover:text-white transition scroll-link">Alumni</a></li>
-      </ul>
     </div>
-  </header>
+    <ul class="space-y-2 mt-6 px-4">
+        <li><a href="#home" class="block px-4 py-3 bg-gray-100 hover:bg-[#023D4D] hover:text-white">Home</a></li>
+        <li><a href="#programs" class="block px-4 py-3 bg-gray-100 hover:bg-[#023D4D] hover:text-white">Programs</a></li>
+        <li><a href="#resources" class="block px-4 py-3 bg-gray-100 hover:bg-[#023D4D] hover:text-white">Resources</a></li>
+        <li><a href="#about" class="block px-4 py-3 bg-gray-100 hover:bg-[#023D4D] hover:text-white">About</a></li>
+        <li><a href="#alumni" class="block px-4 py-3 bg-gray-100 hover:bg-[#023D4D] hover:text-white">Alumni</a></li>
+    </ul>
+</div>
 
- <!-- Hero Section -->
- <section id="home" class="relative h-screen">
-  <!-- Background Image with Overlay -->
-  <div class="absolute inset-0 bg-overlay bg-cover bg-no-repeat bg-left-bottom md:bg-right transition-all duration-300 ease-in-out hover:brightness-75 hover:scale-105">
-  </div>
+<section id="home" class="relative h-screen">
+    <div class="absolute inset-0 bg-overlay bg-cover bg-no-repeat bg-left-bottom md:bg-right transition-all duration-300 ease-in-out hover:brightness-75 hover:scale-105"></div>
 
-  <!-- Hero Content -->
-  <div class="relative flex items-center justify-center h-full px-4 ">
-    <div data-aos="fade-right" class="text-center text-[#023D4D] mt-[-40px]">
-      <h2 class="font-cardo text-2xl font-[400] leading-tight ">
-        Embark on a journey from
-      </h2>
-      <h2 data-aos="fade-right" class="font-cardo text-2xl font-[400] leading-tight text-right">
-        success to significance.
-      </h2>
+    <div class="relative flex items-center justify-center h-full px-4">
+        <div class="hero-text text-center text-[#023D4D] mt-[-40px]" data-aos="fade-right">
+            <h2 class="font-cardo text-2xl font-[400] leading-tight">
+                Embark on a journey from
+            </h2>
+            <h2 data-aos="fade-right" class="font-cardo text-2xl font-[400] leading-tight text-right">
+                success to significance.
+            </h2>
+        </div>
     </div>
-  </div>
 </section>
+
+
+
+
 
 <section  
    
     class="relative bg-white pb-[40px] pt-[12vh] mt-[-90px] rounded-t-[60px] items-center flex justify-center mb-[40px]">
-  <div class="container mx-auto py-10"   data-aos="fade-up"
-  data-aos-anchor-placement="bottom-bottom">
+  <div class="container mx-auto py-10"    data-aos="fade-up"
+  data-aos-duration="3000">
     <!-- Swiper Container -->
     <div class="swiper">
       <!-- Swiper Wrapper -->
       <div class="swiper-wrapper">
         <!-- Slide 1 -->
         <div class="swiper-slide flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-6">
-          <img
+          <img data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-duration="1500"
             src="images/Images-02.png"
             alt="Empower your journey"
             class="w-48 h-48 rounded-lg shadow-lg"
           />
           <div class="text-center md:text-left">
-            <div class="text-[#023D4D]">
+            <div  data-aos="fade-up"
+            data-aos-duration="3000" class="text-[#023D4D]">
               <p class="text-[#023D4D] text-[19px]">03</p>
               <p class="text-[#023D4D] text-[17px] mt-[-8px]">Dec</p>
             </div>
-            <h3 class="text-2xl font-bold text-[#023D4D]">Lorem ipsum</h3>
-            <p class="pp text-[#023D4D] mt-2 mb-[20px]">
+            <h3  data-aos="fade-up"
+            data-aos-duration="3000" class="text-2xl font-bold text-[#023D4D]">Lorem ipsum</h3>
+            <p data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="1500" class="pp text-[#023D4D] mt-2 mb-[20px]">
               Lorem ipsum dolor sit amet, consectetuer.
             </p>
-            <a href="#" 
+            <a href="#" data-aos="fade-up"
+            data-aos-duration="3000"
               class="mt-2 px-4 py-1 border border-[#023D4D] text-[16px] text-[#023D4D] rounded hover:bg-[#023D4D] hover:text-white block md:inline-block">
               Register Now
             </a>
@@ -180,15 +236,21 @@
       <div class="flex flex-col md:flex-row gap-8">
         <!-- Image -->
         <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-          <img src="images/Images-03.png" alt="Imagine a world" class="rounded-[20px] w-[200px] h-[240px] object-cover shadow-lg"  data-aos="fade-up"
-          data-aos-anchor-placement="bottom-bottom">
+          <img src="images/Images-03.png" alt="Imagine a world" class="rounded-[20px] w-[200px] h-[240px] object-cover shadow-lg" data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-duration="1500">
         </div>
         <!-- Content -->
-        <div class="w-full md:w-1/2 text-center md:text-left" data-aos="fade-left">
-          <h2 class="text-2xl md:text-[24px] font-[600] text-[#023D4D] leading-snug mb-[10px]">
+        <div class="w-full md:w-1/2 text-center md:text-left"  data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500" >
+          <h2  data-aos="fade-up"
+          data-aos-duration="3000" class="text-2xl md:text-[24px] font-[600] text-[#023D4D] leading-snug mb-[10px]">
             Imagine a world where <br> everything is possible.
           </h2>
-          <p class="tracking-[0.01em] leading-[1.75] text-[#023D4D]">
+          <p data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-duration="1500" class="tracking-[0.01em] leading-[1.75] text-[#023D4D]">
             It is your time to rise, reclaim your power, and <br> chart a bold new course. 
             Limitless possibilities <br> are waiting—are you ready?
           </p>
@@ -198,7 +260,8 @@
       <!-- Section with Heading and Separated Images -->
       <div class="flex flex-col items-center space-y-8 relative px-4">
         <!-- Heading -->
-        <h2 data-aos="zoom-in-down" class="ml-[28%] tracking-[0.01em] text-[20px] md:text-[24px] font-[500] text-[#023D4D] leading-snug mt-6 mb-6">
+        <h2  data-aos="fade-up"
+        data-aos-duration="3000" class="ml-[28%] tracking-[0.01em] text-[20px] md:text-[24px] font-[500] text-[#023D4D] leading-snug mt-6 mb-6">
           Get ready to undertake the <br> transformation of a lifetime
         </h2>
   
@@ -208,13 +271,16 @@
           <img 
             src="images/Images-04.png" 
             alt="Running Track" 
-            class="w-[250px] h-[180px] md:w-[300px] md:h-[220px] rounded-lg object-cover shadow-lg" data-aos="zoom-in-right">
+            class="w-[250px] h-[180px] md:w-[300px] md:h-[220px] rounded-lg object-cover shadow-lg"  data-aos="fade-up"
+            data-aos-duration="3000">
   
           <!-- Second Image (Meditation) -->
           <img 
             src="images/Images-05.png" 
             alt="Meditation" 
-            class="w-[110px] h-[150px] md:w-[160px] md:h-[250px] rounded-[20px] object-cover  mt-6 md:mt-11" data-aos="zoom-out">
+            class="w-[110px] h-[150px] md:w-[160px] md:h-[250px] rounded-[20px] object-cover  mt-6 md:mt-11"  data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="1500">
         </div>
       </div>
     </div>
@@ -222,14 +288,16 @@
   
 
   <section>
+
     <div  data-aos="fade-up"
-    data-aos-anchor-placement="top-bottom" class="bg-white  " style="background-image: url('./images/Images-10.png'); background-size: cover; ">
+    data-aos-duration="3000" class="bg-white  " style="background-image: url('./images/Images-10.png'); background-size: cover; ">
       
-      
-            <!-- Content Section -->
+      <!-- Content Section -->
     <div class="relative z-10 flex flex-col items-center text-center px-6 lg:px-12 py-16 sm:px-9">
       <!-- Heading -->
-      <h2 data-aos="zoom-in" class="text-xl lg:text-3xl font-[500] text-[#023D4D]">
+      <h2  data-aos="fade-down"
+      data-aos-easing="linear"
+      data-aos-duration="1500" class="text-xl lg:text-3xl font-[500] text-[#023D4D]">
         Real Stories of Transformation
       </h2>
       
@@ -240,22 +308,26 @@
           src="images/Images-06.png" 
           alt="Speaker" 
           class="rounded-lg shadow-lg w-full max-w-[400px] sm:max-w-[350px] h-auto" 
-          data-aos="zoom-in-up"
+          data-aos="fade-up"
+     data-aos-duration="3000"
         >
       </div>
 
       <!-- Description -->
       <p 
-        data-aos="fade-up"
-        data-aos-duration="3000" 
+      data-aos="fade-down"
+      data-aos-easing="linear"
+      data-aos-duration="1500"
         class="mt-4 text-[#023D4D] text-[14px] sm:text-[16px] md:text-[18px] text-justify w-full max-w-[350px] sm:max-w-[400px] px-4 sm:px-0 md:px-6 line-clamp-3 sm:line-clamp-3 md:line-clamp-2">
         Discover inspiring journeys from our past participants as they share their paths to clarity, purpose, fulfillment, and success.
       </p>
     </div>
+
+
       </div>
       
       <div class="bg-[#FAF4E3] py-12 flex items-center justify-center" data-aos="fade-up"
-      data-aos-anchor-placement="center-bottom">
+      data-aos-duration="3000">
         <div class="relative w-full max-w-xl text-center">
           <!-- Swiper Container -->
           <div class="swiper">
@@ -264,18 +336,21 @@
               <!-- Slide 1 -->
               <div class="swiper-slide flex flex-col items-center">
                 <img
-                  src="images/Images-07.png"
+                  src="images/music.webp"
                   alt="Person 1"
                   class="w-20 h-20 rounded-full border-2 border-gray-300 mb-4"
-                />
-                <p class="text-gray-700 italic px-4">
+                  data-aos="fade-up"
+                  data-aos-duration="3000" />
+                <p data-aos="fade-down"
+                data-aos-easing="linear"
+                data-aos-duration="1500" class="text-gray-700 italic px-4" >
                   This course changed my life in ways I never imagined. <br> It gave me the clarity I needed.
                 </p>
               </div>
               <!-- Slide 2 -->
               <div class="swiper-slide flex flex-col items-center">
                 <img
-                  src="images/Images-07.png"
+                  src="images/music.webp"
                   alt="Person 2"
                   class="w-20 h-20 rounded-full border-2 border-gray-300 mb-4"
                 />
@@ -286,7 +361,7 @@
               <!-- Slide 3 -->
               <div class="swiper-slide flex flex-col items-center">
                 <img
-                  src="images/Images-07.png"
+                  src="images/music.webp"
                   alt="Person 3"
                   class="w-20 h-20 rounded-full border-2 border-gray-300 mb-4"
                 />
@@ -297,11 +372,15 @@
             </div>
       
             <!-- Navigation Buttons -->
-            <div class="swiper-button-prev text-[#023D4D] "></div>
-            <div class="swiper-button-next  text-[#023D4D] "></div>
+            <div class="swiper-button-prev text-[#023D4D] " data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="1500"></div>
+            <div class="swiper-button-next  text-[#023D4D] "  data-aos="fade-up"
+            data-aos-duration="3000"></div>
           </div>
         </div>
-      </div>  <!--end-->
+      </div> 
+       <!--end-->
 
       <section class="py-12 bg-white">
         <section class="wrapper">
@@ -309,23 +388,37 @@
         <div class="container mx-auto px-6 md:px-12">
           <div class="flex flex-col md:flex-row items-center gap-8">
             <!-- Text Content -->
-            <div data-aos="fade-right" class="w-full md:w-1/2 text-center md:text-left">
-              <h2 data-aos="fade-up" class="text-2xl md:text-3xl font-semibold text-[#023D4D] leading-snug mb-4">
+            <div data-aos="fade-right"
+            data-aos-offset="300"
+            data-aos-easing="ease-in-sine" class="w-full md:w-1/2 text-center md:text-left">
+              <h2 data-aos="fade-up"
+              data-aos-duration="3000" class="text-2xl md:text-3xl font-semibold text-[#023D4D] leading-snug mb-4">
                 Here’s What You <br> Need To Do Next
               </h2>
-              <p data-aos="fade-down" class="text-[#023D4D] tracking-[0.01em] leading-relaxed mb-2">
+              <p data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="1500" class="text-[#023D4D] tracking-[0.01em] leading-relaxed mb-2">
                 Close your eyes and picture the life <br> you’ve always dreamed of. <br>
                 It’s within your reach—just one click away. <br>
               
               </p>
-              <p data-aos="fade-down" class="text-[#023D4D] tracking-[0.01em] leading-relaxed mb-6">  Start your journey today!</p>
-              <button data-aos="fade-down" class="px-6 py-1 border border-[#023D4D] text-[#023D4D] font-medium rounded-md hover:bg-[#023D4D] hover:text-white transition">
+              <p data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="1500" class="text-[#023D4D] tracking-[0.01em] leading-relaxed mb-6">  Start your journey today!</p>
+              <button data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="1500" class="px-6 py-1 border border-[#023D4D] text-[#023D4D] font-medium rounded-md hover:bg-[#023D4D] hover:text-white transition">
                 Let’s Begin
               </button>
             </div>
             <!-- Image Content -->
-            <div class="w-full md:w-1/2 flex justify-center" data-aos="fade-left">
-              <img src="images/Images-08.png" alt="Woman meditating" class="rounded-lg shadow-lg w-[250px] h-[300px] md:w-[300px] md:h-[360px] object-cover">
+            <div class="w-full md:w-1/2 flex justify-center"  data-aos="fade-left"
+            data-aos-anchor="#example-anchor"
+            data-aos-offset="500"
+            data-aos-duration="500">
+              <img src="images/Images-08.png" alt="Woman meditating" class="rounded-lg shadow-lg w-[250px] h-[300px] md:w-[300px] md:h-[360px] object-cover" data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="1500">
             </div>
           </div>
         </div>
@@ -334,8 +427,9 @@
       
   </section>
   <footer 
-    data-aos="fade-up" 
-    data-aos-anchor-placement="center-bottom" 
+  data-aos="fade-down"
+  data-aos-easing="linear"
+  data-aos-duration="1500" 
     class="bg-[#FAF4E3] text-[#023D4D] py-10 rounded-t-[60px]">
     <section class="wrapper">
 
@@ -343,7 +437,10 @@
     <!-- Main Content -->
     <div class="flex flex-col lg:flex-row justify-center lg:justify-between space-y-8 lg:space-y-0 lg:space-x-12">
       <!-- Left Section: Logo and Description -->
-      <div class="max-w-sm mx-auto lg:mx-0" data-aos="flip-down">
+      <div class="max-w-sm mx-auto lg:mx-0"  data-aos="fade-zoom-in"
+      data-aos-easing="ease-in-back"
+      data-aos-delay="300"
+      data-aos-offset="0">
         <h2>
           <img src="images/Images-09.png" alt="Logo" class="h-[70px] mx-auto lg:mx-0">
         </h2>
@@ -422,27 +519,31 @@
   <!-- JavaScript for Slider -->
   <script>
  AOS.init();
-
  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const closeMenu = document.getElementById('close-menu');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeMenu = document.getElementById('close-menu');
+      const logoContainer = document.getElementById('logo-container');
+      const bgOverlay = document.querySelector('.bg-overlay');
+      const navLinks = document.querySelector('.nav-links');
+      const heroText = document.querySelector('.hero-text');
 
-  // Open the menu
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.remove('translate-x-full');
-  });
+      // Open the menu
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.remove('translate-x-full');
+      });
 
-  // Close the menu
-  closeMenu.addEventListener('click', () => {
-    mobileMenu.classList.add('translate-x-full');
-  });
+      // Close the menu
+      closeMenu.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-full');
+      });
 
-  // Close the menu when clicking outside (optional)
-  window.addEventListener('click', (event) => {
-    if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-      mobileMenu.classList.add('translate-x-full');
-    }
-  });
+      // Close the menu when clicking outside (optional)
+      window.addEventListener('click', (event) => {
+        if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+          mobileMenu.classList.add('translate-x-full');
+        }
+      });
+
 
 
     const swiper = new Swiper('.swiper', {
@@ -472,28 +573,25 @@
     slidesPerView: 1, // Show one slide at a time
     spaceBetween: 10, // Spacing between slides
   });
-  const largeLogo = document.getElementById("large-logo");
-  const header = document.getElementById("header");
-  const heroContent = document.getElementById("hero-content");
 
-  window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
-    const maxScroll = 300; // Adjust this value for when the transition completes
 
-    if (scrollY <= maxScroll) {
-      const scale = 1 - scrollY / maxScroll;
-      const opacity = 1 - scrollY / maxScroll;
-
-      largeLogo.style.transform = `scale(${scale})`;
-      largeLogo.style.opacity = opacity;
-
-      header.style.transform = `translateY(${scrollY}px)`;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) { // Threshold for scroll trigger
+        // Move logo to navbar position
+        logoContainer.classList.add('scrolled');
+        navLinks.classList.add('visible');
+        heroText.classList.add('visible');
+        bgOverlay.style.filter = 'none'; // Remove blur
+        bgOverlay.style.opacity = '1'; // Restore opacity
     } else {
-      largeLogo.style.opacity = 0;
-      header.style.transform = "translateY(0)";
-      document.body.classList.add("scrolled");
+        // Reset to initial position
+        logoContainer.classList.remove('scrolled');
+        navLinks.classList.remove('visible');
+        heroText.classList.remove('visible');
+        bgOverlay.style.filter = 'blur(10px)'; // Add blur back
+        bgOverlay.style.opacity = '0.3'; // Lower opacity
     }
-  });
+});
 
   </script>
 
